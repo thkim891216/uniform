@@ -1,49 +1,35 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>나만의 유니폼 만들기</title>
-  <style>
-    body { font-family: sans-serif; text-align: center; background: #fef01b; }
-    canvas { border: 2px solid #000; margin-top: 20px; }
-    input { margin: 10px; padding: 8px; font-size: 16px; }
-    button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
-  </style>
-</head>
-<body>
-  <h1>🏀 나만의 유니폼 만들기</h1>
-  <input type="text" id="nameInput" placeholder="이름을 입력하세요 (예: 김태형)">
-  <input type="number" id="numberInput" placeholder="번호 입력 (예: 89)">
-  <br>
-  <button onclick="drawUniform()">생성하기</button>
-  <canvas id="uniformCanvas" width="400" height="600"></canvas>
+<canvas id="jerseyCanvas" width="500" height="600"></canvas>
+<br>
+<input type="text" id="nameInput" placeholder="이름 입력 (예: 김김김)">
+<input type="number" id="numberInput" placeholder="번호 입력 (예: 32)">
+<button onclick="drawJersey()">적용하기</button>
 
-  <script>
-    function drawUniform() {
-      const name = document.getElementById("nameInput").value;
-      const number = document.getElementById("numberInput").value;
-      const canvas = document.getElementById("uniformCanvas");
-      const ctx = canvas.getContext("2d");
+<script>
+const canvas = document.getElementById('jerseyCanvas');
+const ctx = canvas.getContext('2d');
+const baseImage = new Image();
+baseImage.src = 'image1.png'; // 첫 번째 이미지
 
-      // 배경
-      ctx.fillStyle = "#fef01b";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+baseImage.onload = () => {
+  drawJersey(); // 초기 이미지 그리기
+};
 
-      // 유니폼 기본
-      ctx.fillStyle = "#000";
-      ctx.fillRect(100, 150, 200, 300); // 몸통
+function drawJersey() {
+  const name = document.getElementById('nameInput').value;
+  const number = document.getElementById('numberInput').value;
 
-      // 번호
-      ctx.font = "bold 60px Arial";
-      ctx.fillStyle = "red";
-      ctx.textAlign = "center";
-      ctx.fillText(number, canvas.width / 2, 300);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
 
-      // 이름
-      ctx.font = "bold 30px Arial";
-      ctx.fillStyle = "white";
-      ctx.fillText(name, canvas.width / 2, 370);
-    }
-  </script>
-</body>
-</html>
+  // 번호
+  ctx.font = 'bold 60px Arial';
+  ctx.fillStyle = 'red';
+  ctx.textAlign = 'center';
+  ctx.fillText(number, canvas.width / 2, 400);
+
+  // 이름
+  ctx.font = 'bold 30px Arial';
+  ctx.fillStyle = 'white';
+  ctx.fillText(name, canvas.width / 2, 460);
+}
+</script>
