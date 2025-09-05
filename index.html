@@ -1,0 +1,35 @@
+<canvas id="jerseyCanvas" width="500" height="600"></canvas>
+<br>
+<input type="text" id="nameInput" placeholder="이름 입력 (예: 김김김)">
+<input type="number" id="numberInput" placeholder="번호 입력 (예: 32)">
+<button onclick="drawJersey()">적용하기</button>
+
+<script>
+const canvas = document.getElementById('jerseyCanvas');
+const ctx = canvas.getContext('2d');
+const baseImage = new Image();
+baseImage.src = 'image1.png'; // 첫 번째 이미지
+
+baseImage.onload = () => {
+  drawJersey(); // 초기 이미지 그리기
+};
+
+function drawJersey() {
+  const name = document.getElementById('nameInput').value;
+  const number = document.getElementById('numberInput').value;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
+
+  // 번호
+  ctx.font = 'bold 60px Arial';
+  ctx.fillStyle = 'red';
+  ctx.textAlign = 'center';
+  ctx.fillText(number, canvas.width / 2, 400);
+
+  // 이름
+  ctx.font = 'bold 30px Arial';
+  ctx.fillStyle = 'white';
+  ctx.fillText(name, canvas.width / 2, 460);
+}
+</script>
